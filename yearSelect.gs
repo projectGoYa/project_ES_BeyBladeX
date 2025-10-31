@@ -27,6 +27,11 @@ function yearSelect(replyToken, userMessage) {
               "type": "message",
               "label": "2024年",
               "text": "2024年"
+            },
+            {
+              "type": "message",
+              "label": "2025年",
+              "text": "2025年"
             }]
           },
           {
@@ -42,6 +47,11 @@ function yearSelect(replyToken, userMessage) {
               "type": "message",
               "label": "キャンセル",
               "text": "キャンセル"
+            },
+            {
+              "type": "message",
+              "label": "　",
+              "text": "　"
             }]
           }]
         }

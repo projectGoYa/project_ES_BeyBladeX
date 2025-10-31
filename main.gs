@@ -1,7 +1,7 @@
 // ロードマップ、登録フォーム　テスト用アカウントへ移行　本番アカウントの準備
 
 var ACCESS_TOKEN = PropertiesService.getScriptProperties().getProperty('LINE_TOKEN');
-var userProperties = PropertiesService.getUserProperties();  // データ一時保存用  todo ユーザーデータだと年などをユーザごとにわけれない
+var userProperties = PropertiesService.getUserProperties();  // データ一時保存用
 
 var count = 0;
 var year = 0;
@@ -33,13 +33,7 @@ function doPost(e) {
   // ユーザーからのメッセージ
   var userMessage = event.message.text;
 
-  // メッセージ以外(スタンプや画像など)が送られてきた場合
-  if (userMessage === undefined) {
-    userMessage = "このメッセージは受け付けておりません\nメニューをお選びください\n\nメニューが表示されていない場合は、現在メンテナンス中です\n詳細は X：https://x.com/HideponHG にてご確認ください";
-    sendMessage(replyToken, userMessage);
-  }
-
-  else if (userMessage === '検索') {
+  if (userMessage === '検索') {
     userMessage = "日程を入力して検索しますか？\n日程を指定しない場合、本日の日付で検索いたします";
     yearJudgment(replyToken, userMessage);
   }
@@ -258,13 +252,6 @@ function doPost(e) {
     userMessage = "見直す項目を選択してください\n終了後はメニューから「終了」をお選びください\n\n現在この機能は準備中のため、初めからやり直してください";
     sendMessage(replyToken, userMessage);
   }
-
-  // 設定したテキスト以外が入力されたとき
-  else {
-    userMessage = "このメッセージは受け付けておりません\nメニューをお選びください\n\nメニューが表示されていない場合は、現在メンテナンス中です\n詳細は X：https://x.com/HideponHG にてご確認ください";
-    sendMessage(replyToken, userMessage);
-  }
-
 
 
 
