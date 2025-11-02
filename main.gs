@@ -32,7 +32,6 @@ function doPost(e) {
 
   // ユーザーからのメッセージ
   var userMessage = event.message.text;
-  var userMessageTwo = "";
 
   if (userMessage === '検索') {
     userMessage = "日程を入力して検索しますか？\n日程を指定しない場合、本日の日付で検索いたします";
@@ -388,11 +387,8 @@ function doPost(e) {
       }
 
       if (es_BeyBladeX_message.length < 1) {  // 何も情報を得られなかったとき
-        userMessage = "出力完了しました\n何も表示されない場合は、一致したデータがありませんでした\n\n検索した条件\n" + year + "年" + month + "月" + day + "日" + "\n" + "都道府県指定なし";  
-
-        userMessageTwo = "探している交流会が見つかりませんか？\nまだ本システムと主催者さまの連携がされていないのかもしれません！\n\n掲載希望の交流会や団体がございましたら、メニュー左のボタンを押して直接メッセージにて担当者へご連絡ください！"
+          userMessage = "出力完了しました\n何も表示されない場合は、一致したデータがありませんでした\n\n検索した条件\n" + year + "年" + month + "月" + day + "日" + "\n" + "都道府県指定なし";
       }
-        sendMessageTwo(replyToken, userMessage, userMessageTwo);
     }
     sendMessage(replyToken, userMessage);
   }
@@ -412,22 +408,6 @@ function doPost(e) {
           'type': 'text',
           'text': userMessage,
         }]
-      })
-    });
-    return ContentService.createTextOutput(JSON.stringify({'content': 'post ok'})).setMimeType(ContentService.MimeType.JSON);
-  }
-
-  // メッセージを２個送るためのメソッド
-  function sendMessageTwo(replyToken, userMessage, userMessageTwo){  
-    UrlFetchApp.fetch(url, {
-      'headers': {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer ' + ACCESS_TOKEN,
-      },
-      'method': 'post',
-      'payload': JSON.stringify({
-        'replyToken': replyToken,
-        'messages': [{'type': 'text', 'text': userMessage,}, {'type': 'text', 'text': userMessageTwo,}]
       })
     });
     return ContentService.createTextOutput(JSON.stringify({'content': 'post ok'})).setMimeType(ContentService.MimeType.JSON);
