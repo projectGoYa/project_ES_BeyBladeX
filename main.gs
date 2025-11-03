@@ -116,7 +116,7 @@ function doPost(e) {
   }
 
   else if (userMessage === '都道府県を検索しない') {
-    userProperties.deleteProperty(userId + '_key_area');  // 都道府県の場合はこれといったデフォルト値がないため、消す
+    userProperties.setProperty(userId + '_key_area',"都道府県指定なし");  // プロパティに指定なしを保存する
     matchSheetReady();  // シート検索へ
   }
 
@@ -171,7 +171,7 @@ function doPost(e) {
   }
 
   else if (userMessage === 'ヘルプ') {
-    userMessage = "本アカウントは、projectGoYa 制作です\n利用方法はこちらです\nhttps://goyalab.hatenablog.com/entry/2023/08/10/060000\n\nお困りの方は、こちらのトークにご入力いただいても対応できません\nご不明な点は、以下のフォームまでお問い合わせ願います\nhttps://goyalab.hatenablog.com/form";
+    userMessage = "本アカウントは、projectGoYa 制作です\n利用方法はこちらです\nhttps://goyalab.hatenablog.com/entry/2023/08/10/060000\n\nお困りの方は、こちらのトークに直接ご入力ください\n担当者が確認して返答いたします";
     sendMessage(replyToken, userMessage);
   }
 
@@ -271,7 +271,7 @@ function doPost(e) {
 
     // 日付がきちんと入っている場合（日付は入れない or 入れるを選択、都道府県を入れないを選択）
     else if (year != null && month != null && day != null) {
-      userMessage = "以下の内容で検索を行いますが、よろしいでしょうか？\n" + year + "年" + month + "月" + day + "日" + "\n" + "都道府県指定なし";
+      userMessage = "以下の内容で検索を行いますが、よろしいでしょうか？\n" + year + "年" + month + "月" + day + "日" + "\n" + area;
       sheetReadyJudgment(replyToken, userMessage);
     }
 
@@ -294,7 +294,7 @@ function doPost(e) {
       // 入力した値を組み立てて、日付にする
       var inputDate = year + "/" + month + "/" + day;
 
-      if (area != null) {  // フル検索（都道府県含む）
+      if (area != "都道府県指定なし") {  // 都道府県を指定した場合
         // 一致しているか
         if (es_BeyBladeX_area == area && es_BeyBladeX_date == inputDate) {
           for(let k = 0; k < es_BeyBladeX_data[0].length; k++) {  // 一番上の項目分繰り返し、一致したデータを出力する
@@ -340,7 +340,7 @@ function doPost(e) {
         }
       }
 
-      else { //if (area == null) {  // todo switch 文をメソッド化
+      else {  // 都道府県を指定しない場合
         // 一致しているか
         if (es_BeyBladeX_date == inputDate) {
           for(let k = 0; k < es_BeyBladeX_data[0].length; k++) {  // 一番上の項目分繰り返し、一致したデータを出力する
@@ -387,7 +387,7 @@ function doPost(e) {
       }
 
       if (es_BeyBladeX_message.length < 1) {  // 何も情報を得られなかったとき
-          userMessage = "出力完了しました\n何も表示されない場合は、一致したデータがありませんでした\n\n検索した条件\n" + year + "年" + month + "月" + day + "日" + "\n" + "都道府県指定なし";
+        userMessage = "出力完了しました\n何も表示されない場合は、一致したデータがありませんでした\n\n検索した条件\n" + year + "年" + month + "月" + day + "日" + "\n" + area;
       }
     }
     sendMessage(replyToken, userMessage);
