@@ -20,11 +20,6 @@ function yearSelect(replyToken, userMessage) {
             "actions": [
             {
               "type": "message",
-              "label": "2023年",
-              "text": "2023年"
-            },
-            {
-              "type": "message",
               "label": "2024年",
               "text": "2024年"
             },
@@ -32,6 +27,11 @@ function yearSelect(replyToken, userMessage) {
               "type": "message",
               "label": "2025年",
               "text": "2025年"
+            },
+            {
+              "type": "message",
+              "label": "2026年",
+              "text": "2026年"
             }]
           },
           {
